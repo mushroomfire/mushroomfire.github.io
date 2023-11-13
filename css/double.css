@@ -1,0 +1,74 @@
+/*首页文章双栏布局*/
+@media screen and (min-width: 1300px) {
+    #recent-posts {
+        margin-top: -1.25rem;/*第一排间距调整，若有磁贴或日历请注释掉该行*/
+        align-content: flex-start;
+        display: flex;
+        flex-wrap: wrap;/*规定灵活的项目在必要的时候拆行或拆列。*/
+        justify-content: space-between;
+        width: 80%;
+    }
+
+    #recent-posts>.recent-post-item {
+        margin-top: 1.25rem;/*左边第一列间距调整*/
+        display: flex;
+        flex-direction: row;
+        height: 15em;/*文章容器容器高度*/
+        width: 49.5%;/*文章容器容器宽度*/
+    }
+
+    #recent-posts>.recent-post-item .post_cover {
+        width: 40%;/*图片封面宽度*/
+        height: 100%;/*图片封面高度*/
+    }
+
+    #recent-posts>.recent-post-item .post_cover img.post_bg {
+        width: 100%;/*图片宽度*/
+        height: 100%;/*图片高度*/
+    }
+
+    #recent-posts>.recent-post-item .left_radius {
+        border-radius: 8px 8px 0 0;/*圆角修改*/
+    }
+
+    #recent-posts>.recent-post-item .right_radius {
+        border-radius: 8px 8px 0 0;/*圆角修改*/
+    }
+
+    .recent-post-info {
+
+        padding: 0 20px!important;/*文字容器左右间距*/
+        margin-top: 1em;/*文字容器上间距*/
+        width: 60% !important;/*文字容器宽度*/
+
+    }
+
+
+    #recent-posts>.recent-post-item>.recent-post-info>.article-meta-wrap {
+        margin-bottom: 1rem;/*控制标题meta信息的底部间距*/
+    }
+
+    /*底部页码导航居中*/
+    #pagination {
+        overflow: hidden;
+        margin-top: 1rem;
+        width: 100%;
+    }
+
+    /*内页容器加宽*/
+    .layout#content-inner {
+        max-width: 1450px;
+    }
+
+    #aside-content {
+        width: 20%;
+        padding-left: 0.8rem;/*侧边栏与首页文章容器距离*/
+    }
+    /*文章内页居中显示*/
+    .layout {
+        display: flex;
+        justify-content: center;
+        padding: .5rem 1.5rem;
+    }
+
+}

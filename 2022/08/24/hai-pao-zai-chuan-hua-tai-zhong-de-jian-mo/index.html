@@ -1,0 +1,520 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>氦泡在氚化钛中的建模 | HerrWu's Blog</title><meta name="keywords" content="分子动力学,Python"><meta name="author" content="HerrWu,934313174@qq.com"><meta name="copyright" content="HerrWu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="氚化钛建模">
+<meta property="og:type" content="article">
+<meta property="og:title" content="氦泡在氚化钛中的建模">
+<meta property="og:url" content="https://blog.mushroomfire.com/2022/08/24/hai-pao-zai-chuan-hua-tai-zhong-de-jian-mo/index.html">
+<meta property="og:site_name" content="HerrWu&#39;s Blog">
+<meta property="og:description" content="氚化钛建模">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.pterclub.com/images/2022/08/27/pid-55980759.png">
+<meta property="article:published_time" content="2022-08-24T08:07:08.000Z">
+<meta property="article:modified_time" content="2023-11-13T14:14:14.672Z">
+<meta property="article:author" content="HerrWu">
+<meta property="article:tag" content="分子动力学">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.pterclub.com/images/2022/08/27/pid-55980759.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.mushroomfire.com/2022/08/24/hai-pao-zai-chuan-hua-tai-zhong-de-jian-mo/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":230},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '氦泡在氚化钛中的建模',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-13 22:14:14'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><script type="text/javascript" src="/js/title.js"></script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/double.css"/><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.0.6/lib/clock.min.css" /><link rel="stylesheet" href="/css/runtime.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://cdn.cbd.int/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg" style="background:url(https://img.pterclub.com/images/2022/08/27/pid-55980759.png);background-attachment: local;background-position: center;background-size: cover;background-repeat: no-repeat;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/22/avatar.gif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> 追番</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-envelope"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.pterclub.com/images/2022/08/27/pid-55980759.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">HerrWu's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fas fa-video"></i><span> 追番</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-envelope"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">氦泡在氚化钛中的建模</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-24T08:07:08.000Z" title="发表于 2022-08-24 16:07:08">2022-08-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-13T14:14:14.672Z" title="更新于 2023-11-13 22:14:14">2023-11-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%88%86%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6/">分子动力学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="氦泡在氚化钛中的建模"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2022/08/24/hai-pao-zai-chuan-hua-tai-zhong-de-jian-mo/#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>钛是一种良好的储氢元素,也可以用来储存氚(氢的同位素),在核物理领域应用十分广泛,但是氚会衰变生成氦元素,这些氦原子在氚化钛晶体中会逐渐聚集形成氦泡,并最终影响基体的力学性质，也就是材料的老化，为了研究其微观性质，我们建立了氚化钛中含氦泡的模型。</p>
+<h2 id="建模过程"><a href="#建模过程" class="headerlink" title="建模过程"></a>建模过程</h2><ol>
+<li>基础晶体建模，这里在每一个钛晶胞中添加一个氚原子。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">bulid_structure</span>(<span class="params">Lattice_Constant, Structure_Type, x, y, z</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    该函数用于创建常见金属晶体结构！</span></span><br><span class="line"><span class="string">    :param Lattice_Constant: 晶格常数</span></span><br><span class="line"><span class="string">    :param Structure_Type: 金属晶体结构：FCC, BCC, HCP</span></span><br><span class="line"><span class="string">    :param x: x方向拓展个数</span></span><br><span class="line"><span class="string">    :param y: y方向拓展个数</span></span><br><span class="line"><span class="string">    :param z: z方向拓展个数</span></span><br><span class="line"><span class="string">    :return: 原子坐标 N-3 array</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> Structure_Type == <span class="string">&#x27;FCC&#x27;</span>:</span><br><span class="line">        <span class="comment"># Cubic FCC basis</span></span><br><span class="line">        basis = np.array([[<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>],</span><br><span class="line">                        [<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>],</span><br><span class="line">                        [<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>]]) * Lattice_Constant</span><br><span class="line"></span><br><span class="line">        base_atoms = np.array([[<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>],</span><br><span class="line">                            [<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.0</span>],</span><br><span class="line">                            [<span class="number">0.5</span>, <span class="number">0.0</span>, <span class="number">0.5</span>],</span><br><span class="line">                            [<span class="number">0.0</span>, <span class="number">0.5</span>, <span class="number">0.5</span>]]) * Lattice_Constant</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> Structure_Type == <span class="string">&#x27;HTi&#x27;</span>:</span><br><span class="line">        basis = np.array([[<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>],</span><br><span class="line">                        [<span class="number">0.0</span>, np.sqrt(<span class="number">3</span>), <span class="number">0.0</span>],</span><br><span class="line">                        [<span class="number">0.0</span>, <span class="number">0.0</span>, np.sqrt(<span class="number">8</span> / <span class="number">3</span>)]]) * Lattice_Constant</span><br><span class="line"></span><br><span class="line">        base_atoms = np.array([[<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>],</span><br><span class="line">                            [<span class="number">0.5</span>, <span class="number">0.5</span> * np.sqrt(<span class="number">3</span>), <span class="number">0.0</span>],</span><br><span class="line">                            [<span class="number">0.5</span>, np.sqrt(<span class="number">3</span>) * <span class="number">5</span> / <span class="number">6</span>, <span class="number">0.5</span> * np.sqrt(<span class="number">8</span> / <span class="number">3</span>)],</span><br><span class="line">                            [<span class="number">0.0</span>, <span class="number">1</span> / <span class="number">3</span> * np.sqrt(<span class="number">3</span>), <span class="number">0.5</span> * np.sqrt(<span class="number">8</span> / <span class="number">3</span>)],</span><br><span class="line">                            [<span class="number">0.25</span>, np.sqrt(<span class="number">3</span>) * <span class="number">5</span> / <span class="number">12</span>, <span class="number">1</span> / <span class="number">4</span> * np.sqrt(<span class="number">8</span> / <span class="number">3</span>)]]) * Lattice_Constant</span><br><span class="line">        </span><br><span class="line">        atype = [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">        positions = []</span><br><span class="line">        atypelist = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(x):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(y):</span><br><span class="line">                <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(z):</span><br><span class="line">                    base_position = np.array([i, j, k], dtype=<span class="built_in">float</span>)</span><br><span class="line">                    cart_position = np.dot(basis, base_position)</span><br><span class="line">                    atypelist += atype</span><br><span class="line">                    <span class="keyword">for</span> atom <span class="keyword">in</span> base_atoms:</span><br><span class="line">                        positions.append(cart_position + atom)</span><br><span class="line"></span><br><span class="line">        positions = np.array(positions)</span><br><span class="line">        atypelist = np.array(atypelist)</span><br><span class="line">        <span class="keyword">return</span> positions, atypelist</span><br><span class="line"></span><br><span class="line">    positions = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(x):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(y):</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(z):</span><br><span class="line">                base_position = np.array([i, j, k])</span><br><span class="line">                cart_position = np.inner(basis.T, base_position)</span><br><span class="line">                <span class="keyword">for</span> atom <span class="keyword">in</span> base_atoms:</span><br><span class="line">                    positions.append(cart_position + atom)</span><br><span class="line">    <span class="keyword">return</span> np.array(positions)</span><br></pre></td></tr></table></figure></li>
+<li>加入单个氦泡 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">onevoidHeTiH</span>(<span class="params">R=<span class="number">250</span>, Lbox=<span class="number">520</span>, L_HTi=<span class="number">2.9511</span>, L_He=<span class="number">2.98</span></span>):</span><br><span class="line">    x, y, z = np.<span class="built_in">round</span>(Lbox / np.array([<span class="number">1</span>, np.sqrt(<span class="number">3</span>), np.sqrt(<span class="number">8</span> / <span class="number">3</span>)]) / L_HTi).astype(<span class="built_in">int</span>)</span><br><span class="line">    HTi, HTi_Type = bulid_structure(L_HTi, <span class="string">&#x27;HTi&#x27;</span>, x, y, z)</span><br><span class="line">    HTi -= np.mean(HTi, axis=<span class="number">0</span>)</span><br><span class="line">    index = np.where(HTi_Type==<span class="number">2</span>)[<span class="number">0</span>]</span><br><span class="line">    N = <span class="built_in">len</span>(index)</span><br><span class="line">    np.random.seed(<span class="number">1000</span>)</span><br><span class="line">    index1 = np.random.choice(index, size = <span class="built_in">int</span>(<span class="number">0.95</span>*N), replace=<span class="literal">False</span>)</span><br><span class="line">    select = np.ones(<span class="built_in">len</span>(HTi), dtype=<span class="built_in">bool</span>)</span><br><span class="line">    select[index1] = <span class="literal">False</span></span><br><span class="line">    HTi = HTi[select]</span><br><span class="line">    HTi_Type = HTi_Type[select]</span><br><span class="line">    HeM = bulid_structure(L_He, <span class="string">&#x27;FCC&#x27;</span>, <span class="number">200</span>, <span class="number">200</span>, <span class="number">200</span>)</span><br><span class="line">    HeM -= np.mean(HeM, axis=<span class="number">0</span>)</span><br><span class="line">    HeM = HeM[np.<span class="built_in">sum</span>(np.square(HeM), axis=<span class="number">1</span>) &lt; R**<span class="number">2</span>]</span><br><span class="line">    void = np.<span class="built_in">sum</span>(np.square(HTi), axis=<span class="number">1</span>) &gt; R**<span class="number">2</span></span><br><span class="line">    HTi = HTi[void]</span><br><span class="line">    HTi_Type = HTi_Type[void]</span><br><span class="line">    positions = np.r_[HTi, HeM]</span><br><span class="line">    atypelist = HTi_Type.tolist() + [<span class="number">3</span>]*<span class="built_in">len</span>(HeM)</span><br><span class="line">    ratio = np.<span class="built_in">round</span>(<span class="built_in">len</span>(HeM) / <span class="built_in">len</span>(HTi_Type[HTi_Type==<span class="number">1</span>]), <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">f&#x27;H-Ti-<span class="subst">&#123;Lbox&#125;</span>-<span class="subst">&#123;L_He&#125;</span>-<span class="subst">&#123;R&#125;</span>-<span class="subst">&#123;ratio&#125;</span>.data&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> op:</span><br><span class="line"></span><br><span class="line">        <span class="comment"># First line is a comment line</span></span><br><span class="line">        op.write(<span class="string">&#x27;HTi structure, written by HerrWu\n\n&#x27;</span>)</span><br><span class="line">        op.write(<span class="string">&#x27;&#123;&#125; atoms\n&#x27;</span>.<span class="built_in">format</span>(<span class="built_in">len</span>(positions)))</span><br><span class="line">        op.write(<span class="string">&#x27;3 atom types\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        op.write(<span class="string">&#x27;&#123;&#125; &#123;&#125; xlo xhi\n&#x27;</span>.<span class="built_in">format</span>(HTi[:,<span class="number">0</span>].<span class="built_in">min</span>(), HTi[:,<span class="number">0</span>].<span class="built_in">min</span>() + x * L_HTi * <span class="number">1.0</span>))</span><br><span class="line">        op.write(<span class="string">&#x27;&#123;&#125; &#123;&#125; ylo yhi\n&#x27;</span>.<span class="built_in">format</span>(HTi[:,<span class="number">1</span>].<span class="built_in">min</span>(), HTi[:,<span class="number">1</span>].<span class="built_in">min</span>() + y * L_HTi * np.sqrt(<span class="number">3</span>)))</span><br><span class="line">        op.write(<span class="string">&#x27;&#123;&#125; &#123;&#125; zlo zhi\n\n&#x27;</span>.<span class="built_in">format</span>(HTi[:,<span class="number">2</span>].<span class="built_in">min</span>(), HTi[:,<span class="number">2</span>].<span class="built_in">min</span>() + z * L_HTi * np.sqrt(<span class="number">8</span> / <span class="number">3</span>)))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Atoms section</span></span><br><span class="line">        op.write(<span class="string">&#x27;Atoms\n\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Write each Position</span></span><br><span class="line">        <span class="keyword">for</span> idx, i <span class="keyword">in</span> <span class="built_in">enumerate</span>(positions):</span><br><span class="line">            op.write(<span class="string">f&#x27;<span class="subst">&#123;idx+<span class="number">1</span>&#125;</span> <span class="subst">&#123;atypelist[idx]&#125;</span> <span class="subst">&#123;i[<span class="number">0</span>]&#125;</span> <span class="subst">&#123;i[<span class="number">1</span>]&#125;</span> <span class="subst">&#123;i[<span class="number">2</span>]&#125;</span>\n&#x27;</span>)</span><br><span class="line">onevoidHeTiH(R=<span class="number">250</span>, Lbox=<span class="number">550</span>, L_HTi=<span class="number">2.9511</span>, L_He=<span class="number">5.75</span>)</span><br></pre></td></tr></table></figure>
+ 结果如下：<br> <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/24/1void-ti.png" width=40% alt="单个氦泡刨面图" border="0" /></li>
+<li>加入多个氦泡 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">numvoidHeTiH</span>(<span class="params">nvoid, R=<span class="number">10</span>, Lbox=<span class="number">100</span>, L_HTi=<span class="number">2.9511</span>, L_He=<span class="number">2.98</span></span>):</span><br><span class="line">    x, y, z = np.<span class="built_in">round</span>(Lbox / np.array([<span class="number">1</span>, np.sqrt(<span class="number">3</span>), np.sqrt(<span class="number">8</span> / <span class="number">3</span>)]) / L_HTi).astype(<span class="built_in">int</span>)</span><br><span class="line">    HTi, HTi_Type = bulid_structure(L_HTi, <span class="string">&#x27;HTi&#x27;</span>, x, y, z)</span><br><span class="line">    HTi -= np.mean(HTi, axis=<span class="number">0</span>)</span><br><span class="line">    index = np.where(HTi_Type==<span class="number">2</span>)[<span class="number">0</span>]</span><br><span class="line">    N = <span class="built_in">len</span>(index)</span><br><span class="line">    index1 = np.random.choice(index, size = <span class="built_in">int</span>(<span class="number">0.95</span>*N), replace=<span class="literal">False</span>)</span><br><span class="line">    select = np.ones(<span class="built_in">len</span>(HTi), dtype=<span class="built_in">bool</span>)</span><br><span class="line">    select[index1] = <span class="literal">False</span></span><br><span class="line">    HTi = HTi[select]</span><br><span class="line">    HTi_Type = HTi_Type[select]</span><br><span class="line">    </span><br><span class="line">    HeM = bulid_structure(L_He, <span class="string">&#x27;FCC&#x27;</span>, <span class="number">80</span>, <span class="number">80</span>, <span class="number">80</span>)</span><br><span class="line">    HeM -= np.mean(HeM, axis=<span class="number">0</span>)</span><br><span class="line">    void = np.ones(<span class="built_in">len</span>(HTi), dtype=<span class="built_in">bool</span>)</span><br><span class="line">    HeMpos = []</span><br><span class="line">    <span class="built_in">print</span>(np.random.randint(-<span class="number">30</span>, <span class="number">30</span>, size=(nvoid, <span class="number">3</span>)))</span><br><span class="line">    <span class="keyword">for</span> coma <span class="keyword">in</span> np.random.randint(-<span class="number">30</span>, <span class="number">30</span>, size=(nvoid, <span class="number">3</span>)):</span><br><span class="line">        void = np.logical_and(void, (np.<span class="built_in">sum</span>(np.square(HTi - coma), axis=<span class="number">1</span>) &gt; R**<span class="number">2</span>))</span><br><span class="line">        hp = HeM.copy()</span><br><span class="line">        hp = hp[np.<span class="built_in">sum</span>(np.square(hp), axis=<span class="number">1</span>) &lt; R**<span class="number">2</span>]</span><br><span class="line">        hp += coma</span><br><span class="line">        HeMpos.append(hp)</span><br><span class="line">    HeMpos = np.vstack(HeMpos)</span><br><span class="line"></span><br><span class="line">    HTi = HTi[void]</span><br><span class="line">    HTi_Type = HTi_Type[void]</span><br><span class="line"></span><br><span class="line">    positions = np.r_[HTi, HeMpos]</span><br><span class="line">    atypelist = HTi_Type.tolist() + [<span class="number">3</span>]*<span class="built_in">len</span>(HeMpos)</span><br><span class="line">    ratio = np.<span class="built_in">round</span>(<span class="built_in">len</span>(HeMpos) / <span class="built_in">len</span>(HTi_Type[HTi_Type==<span class="number">1</span>]), <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">f&#x27;H-Ti-<span class="subst">&#123;Lbox&#125;</span>-<span class="subst">&#123;L_He&#125;</span>-<span class="subst">&#123;R&#125;</span>-<span class="subst">&#123;ratio&#125;</span>.data&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> op:</span><br><span class="line"></span><br><span class="line">        <span class="comment"># First line is a comment line</span></span><br><span class="line">        op.write(<span class="string">&#x27;HTi structure, written by HerrWu\n\n&#x27;</span>)</span><br><span class="line">        op.write(<span class="string">&#x27;&#123;&#125; atoms\n&#x27;</span>.<span class="built_in">format</span>(<span class="built_in">len</span>(positions)))</span><br><span class="line">        op.write(<span class="string">&#x27;3 atom types\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        op.write(<span class="string">&#x27;&#123;&#125; &#123;&#125; xlo xhi\n&#x27;</span>.<span class="built_in">format</span>(HTi[:,<span class="number">0</span>].<span class="built_in">min</span>(), HTi[:,<span class="number">0</span>].<span class="built_in">min</span>() + x * L_HTi * <span class="number">1.0</span>))</span><br><span class="line">        op.write(<span class="string">&#x27;&#123;&#125; &#123;&#125; ylo yhi\n&#x27;</span>.<span class="built_in">format</span>(HTi[:,<span class="number">1</span>].<span class="built_in">min</span>(), HTi[:,<span class="number">1</span>].<span class="built_in">min</span>() + y * L_HTi * np.sqrt(<span class="number">3</span>)))</span><br><span class="line">        op.write(<span class="string">&#x27;&#123;&#125; &#123;&#125; zlo zhi\n\n&#x27;</span>.<span class="built_in">format</span>(HTi[:,<span class="number">2</span>].<span class="built_in">min</span>(), HTi[:,<span class="number">2</span>].<span class="built_in">min</span>() + z * L_HTi * np.sqrt(<span class="number">8</span> / <span class="number">3</span>)))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Atoms section</span></span><br><span class="line">        op.write(<span class="string">&#x27;Atoms\n\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Write each Position</span></span><br><span class="line">        <span class="keyword">for</span> idx, i <span class="keyword">in</span> <span class="built_in">enumerate</span>(positions):</span><br><span class="line">            op.write(<span class="string">f&#x27;<span class="subst">&#123;idx+<span class="number">1</span>&#125;</span> <span class="subst">&#123;atypelist[idx]&#125;</span> <span class="subst">&#123;i[<span class="number">0</span>]&#125;</span> <span class="subst">&#123;i[<span class="number">1</span>]&#125;</span> <span class="subst">&#123;i[<span class="number">2</span>]&#125;</span>\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">numvoidHeTiH(nvoid=<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+ 结果如下：<br> <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/24/6void-ti.png" width=40% alt="多个氦泡刨面图" border="0"><br> <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/24/6void.png" width=40% alt="删掉钛原子示意图" border="0"></li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://blog.mushroomfire.com">HerrWu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.mushroomfire.com/2022/08/24/hai-pao-zai-chuan-hua-tai-zhong-de-jian-mo/">https://blog.mushroomfire.com/2022/08/24/hai-pao-zai-chuan-hua-tai-zhong-de-jian-mo/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.mushroomfire.com" target="_blank">HerrWu's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%88%86%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6/">分子动力学</a><a class="post-meta__tags" href="/tags/Python/">Python</a></div><div class="post_share"><div class="social-share" data-image="https://img.pterclub.com/images/2022/08/27/pid-55980759.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/08/29/matplotlib-hui-tu-mo-ban/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/27/pid-56149210Anthesis.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Matplotlib绘图模板</div></div></a></div><div class="next-post pull-right"><a href="/2022/08/20/airebo-shi-han-shu-jie-duan-ban-jing-ce-shi/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/27/pid-57945368C90SCHOOL-GIRLS-portrait-_p0.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">AIREBO势函数截断半径测试</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/08/20/airebo-shi-han-shu-jie-duan-ban-jing-ce-shi/" title="AIREBO势函数截断半径测试"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/27/pid-57945368C90SCHOOL-GIRLS-portrait-_p0.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-20</div><div class="title">AIREBO势函数截断半径测试</div></div></a></div><div><a href="/2022/09/01/chong-ji-guo-cheng-zhong-bo-xi-tu-shu-ju-huo-qu-jiao-cheng/" title="冲击过程中波系图数据获取教程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/27/pid-54474678.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-01</div><div class="title">冲击过程中波系图数据获取教程</div></div></a></div><div><a href="/2022/08/20/chang-jian-jing-ti-jie-gou-jian-mo/" title="常见晶体结构建模"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/27/pid-58606862Transparent.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-20</div><div class="title">常见晶体结构建模</div></div></a></div><div><a href="/2022/08/15/qiu-xing-shi-mo-xi-jian-mo-jiao-cheng/" title="球形石墨烯建模教程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/27/pid-7706755.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-15</div><div class="title">球形石墨烯建模教程</div></div></a></div><div><a href="/2022/08/15/gao-shang-he-jin-jian-mo-jiao-cheng/" title="高熵合金建模教程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/27/pid-56117137.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-15</div><div class="title">高熵合金建模教程</div></div></a></div><div><a href="/2022/08/19/shi-mo-xi-wang-luo-yu-lu-ji-ti-fu-he-jian-mo-jiao-cheng/" title="石墨烯网络与铝基体复合建模教程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/27/pid-7937247.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-19</div><div class="title">石墨烯网络与铝基体复合建模教程</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/22/avatar.gif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">HerrWu</div><div class="author-info__description">万事顺遂</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mushroomfire"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/mushroomfire" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:934313174@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">少抱怨,多干活!</div><timing></timing></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">背景介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%BA%E6%A8%A1%E8%BF%87%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">建模过程</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/11/27/hexo-qian-xi-yi-ji-xin-jian-git-cang-ku/" title="hexo迁徙以及新建git仓库"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/27/pid-56669634_p0.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hexo迁徙以及新建git仓库"/></a><div class="content"><a class="title" href="/2022/11/27/hexo-qian-xi-yi-ji-xin-jian-git-cang-ku/" title="hexo迁徙以及新建git仓库">hexo迁徙以及新建git仓库</a><time datetime="2023-11-13T14:34:56.363Z" title="更新于 2023-11-13 22:34:56">2023-11-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/13/lammps-cmake-an-zhuang-ji-lu/" title="Lammps Cmake安装记录"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/27/pid-57945368C90SCHOOL-GIRLS-portrait-_p0.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Lammps Cmake安装记录"/></a><div class="content"><a class="title" href="/2023/11/13/lammps-cmake-an-zhuang-ji-lu/" title="Lammps Cmake安装记录">Lammps Cmake安装记录</a><time datetime="2023-11-13T14:28:04.846Z" title="更新于 2023-11-13 22:28:04">2023-11-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/20/airebo-shi-han-shu-jie-duan-ban-jing-ce-shi/" title="AIREBO势函数截断半径测试"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/27/pid-57945368C90SCHOOL-GIRLS-portrait-_p0.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AIREBO势函数截断半径测试"/></a><div class="content"><a class="title" href="/2022/08/20/airebo-shi-han-shu-jie-duan-ban-jing-ce-shi/" title="AIREBO势函数截断半径测试">AIREBO势函数截断半径测试</a><time datetime="2023-11-13T14:14:14.672Z" title="更新于 2023-11-13 22:14:14">2023-11-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By HerrWu</div><div class="footer_custom_text">或许命运的签，只让我们遇见</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.mushroomfire.com/',
+      region: 'ap-shanghai',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.mushroomfire.com/',
+      region: 'ap-shanghai',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.mushroomfire.com/',
+        region: 'ap-shanghai',
+        pageSize: 3,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><div class="aplayer no-destroy" data-id="4933062498" data-server="netease" data-type="playlist" data-order="list" data-fixed="true" data-preload="auto" data-autoplay="false" data-mutex="true" > </div><script src="/js/mouse_snow.js"></script><script src="/js/timing.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show","#web_bg",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_clock_anzhiyu_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.0.6/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock_anzhiyu')
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var qweather_key = 'cd2d08218a384b6a97f3677732bf2b41';
+  var gaud_map_key = '5ceb3a6d80446026376b5c64121b1388';
+  var baidu_ak_key = 'undefined';
+  var flag = 0;
+  var clock_rectangle = '112.6534116,27.96920845';
+  var clock_default_rectangle_enable = 'false';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.0.6/lib/clock.min.js"></script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v6.2.0" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题版本Butterfly_v4.4.0" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index" style="margin-inline:5px" data-title="本站已在京进行备案" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/京ICP备-2022025650号-e1d492?style=flat&amp;logo=data:image/png;base64,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" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" data-title="本站默认线路托管于Vercel" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" alt=""/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime.min.js"></script><script data-pjax>
+    function butterfly_categories_card_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 380px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 320px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover1.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/分子动力学/&quot;);" href="javascript:void(0);">分子动力学</a><span class="categoryBar-list-count">8</span><span class="categoryBar-list-descr">分子动力学</span></li><li class="categoryBar-list-item" style="background:url(https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover2.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/深度学习/&quot;);" href="javascript:void(0);">深度学习</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">编程语言</span></li><li class="categoryBar-list-item" style="background:url(https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover3.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/编程语言/&quot;);" href="javascript:void(0);">编程语言</a><span class="categoryBar-list-count">5</span><span class="categoryBar-list-descr">科研绘图</span></li><li class="categoryBar-list-item" style="background:url(https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover5.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/软件安装/&quot;);" href="javascript:void(0);">软件安装</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">深度学习</span></li><li class="categoryBar-list-item" style="background:url(https://cdn.cbd.int/akilar-candyassets@1.0.36/image/cover6.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/科研绘图/&quot;);" href="javascript:void(0);">科研绘图</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">软件安装</span></li><li class="categoryBar-list-item" style="background:url(https://img.pterclub.com/images/2022/08/29/87b771791ed5b58b9fd483e4d29f16d.jpg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/博客技术/&quot;);" href="javascript:void(0);">博客技术</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">恋爱生活</span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/恋爱生活/&quot;);" href="javascript:void(0);">恋爱生活</a><span class="categoryBar-list-count">2</span><span class="categoryBar-list-descr"></span></li></ul></div></div>';
+      console.log('已挂载butterfly_categories_card')
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      }
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    butterfly_categories_card_injector_config()
+    }
+  </script><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/08/19/shi-mo-xi-wang-luo-yu-lu-ji-ti-fu-he-jian-mo-jiao-cheng/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/27/pid-7937247.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-08-19</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/08/19/shi-mo-xi-wang-luo-yu-lu-ji-ti-fu-he-jian-mo-jiao-cheng/&quot;);" href="javascript:void(0);" alt="">石墨烯网络与铝基体复合建模教程</a><div class="blog-slider__text">石墨烯网络与铝基体复合建模及弛豫</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/08/19/shi-mo-xi-wang-luo-yu-lu-ji-ti-fu-he-jian-mo-jiao-cheng/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/08/24/hai-pao-zai-chuan-hua-tai-zhong-de-jian-mo/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/27/pid-55980759.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-08-24</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/08/24/hai-pao-zai-chuan-hua-tai-zhong-de-jian-mo/&quot;);" href="javascript:void(0);" alt="">氦泡在氚化钛中的建模</a><div class="blog-slider__text">氚化钛建模</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/08/24/hai-pao-zai-chuan-hua-tai-zhong-de-jian-mo/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/09/01/chong-ji-guo-cheng-zhong-bo-xi-tu-shu-ju-huo-qu-jiao-cheng/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/27/pid-54474678.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-09-01</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/09/01/chong-ji-guo-cheng-zhong-bo-xi-tu-shu-ju-huo-qu-jiao-cheng/&quot;);" href="javascript:void(0);" alt="">冲击过程中波系图数据获取教程</a><div class="blog-slider__text">对一维冲击体系画波系图</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/09/01/chong-ji-guo-cheng-zhong-bo-xi-tu-shu-ju-huo-qu-jiao-cheng/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/09/10/mdapy-shi-yong-shuo-ming/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/27/pid-58606862Transparent.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-09-10</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/09/10/mdapy-shi-yong-shuo-ming/&quot;);" href="javascript:void(0);" alt="">mdapy使用说明</a><div class="blog-slider__text">mdapy使用说明</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/09/10/mdapy-shi-yong-shuo-ming/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/08/15/qiu-xing-shi-mo-xi-jian-mo-jiao-cheng/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/27/pid-7706755.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-08-15</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/08/15/qiu-xing-shi-mo-xi-jian-mo-jiao-cheng/&quot;);" href="javascript:void(0);" alt="">球形石墨烯建模教程</a><div class="blog-slider__text">球形石墨烯建模过程以及简单弛豫。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/08/15/qiu-xing-shi-mo-xi-jian-mo-jiao-cheng/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/08/20/chang-jian-jing-ti-jie-gou-jian-mo/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/27/pid-58606862Transparent.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-08-20</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/08/20/chang-jian-jing-ti-jie-gou-jian-mo/&quot;);" href="javascript:void(0);" alt="">常见晶体结构建模</a><div class="blog-slider__text">常见晶体结构建模</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/08/20/chang-jian-jing-ti-jie-gou-jian-mo/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2023/11/13/lammps-cmake-an-zhuang-ji-lu/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/27/pid-57945368C90SCHOOL-GIRLS-portrait-_p0.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-11-13</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2023/11/13/lammps-cmake-an-zhuang-ji-lu/&quot;);" href="javascript:void(0);" alt="">Lammps Cmake安装记录</a><div class="blog-slider__text">wsl2中lammps并行版本安装</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2023/11/13/lammps-cmake-an-zhuang-ji-lu/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/08/20/airebo-shi-han-shu-jie-duan-ban-jing-ce-shi/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.pterclub.com/images/2022/08/27/pid-57945368C90SCHOOL-GIRLS-portrait-_p0.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-08-20</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/08/20/airebo-shi-han-shu-jie-duan-ban-jing-ce-shi/&quot;);" href="javascript:void(0);" alt="">AIREBO势函数截断半径测试</a><div class="blog-slider__text">AIREBO势函数截断半径测试</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/08/20/airebo-shi-han-shu-jie-duan-ban-jing-ce-shi/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '30');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('article-sort-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__slideInRight');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300,"hOffset":-20,"vOffset":20},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body></html>
